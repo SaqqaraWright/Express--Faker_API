@@ -21,6 +21,7 @@ class User{
         this.email = faker.internet.email();
         this.phoneNumber = faker.phone.phoneNumber();
         this.password = faker.internet.password()
+        // this.companies=[] //to store companies into user class, this was used for the many to many relationship join commented out below
         this.id = users.length
         users.push(this)
     }
@@ -40,6 +41,7 @@ class Company{
             zipCode: faker.address.zipCode(),
             country: faker.address.country()
         }
+        // this.users=[] this was used for the many to many relationship join commented out below
     }
 }
 
@@ -63,6 +65,14 @@ app.get("/api/user/company", (req, res)=>{
     res.json({user:newUser, company: newCompany})
 })
 
+//This is how to do a many to many relationship join
+// app.get("/api/user/:userid/company/:companyid", (req, res)=>{ 
+//     let user = users[req.params.userid];
+//     let company = companies[req.params.companyid];
+//     user.companies.push(company)
+//     company.users.push(user)
+//     res.json({user:user, company: company}) //first one before colon is the key the word after the colon is the value
+// })
 
 
 
